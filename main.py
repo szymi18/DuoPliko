@@ -1,7 +1,9 @@
+import difflib
+import filecmp
 import sys
+from datetime import time
 
-from PyQt6.QtWidgets import QDialog, QApplication
-
+from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
 from layout import Ui_Dialog
 
 
@@ -12,11 +14,63 @@ class MyForm(QDialog):
         self.ui.setupUi(self)
         self.show()
 
+        self.ui.file1button.clicked.connect(self.browsefiles)
+        self.ui.file2button.clicked.connect(self.browsefiles2)
+        self.ui.submit.clicked.connect(self.filesCompare)
+
+        self.file1_path = None
+        self.file2_path = None
+
+    def browsefiles(self):
+        """Wybór pliku 1 i przypisanie do file1_path"""
+        file1, _ = QFileDialog.getOpenFileName(self, 'Open file')
+        if file1:
+            self.file1_path = file1
+            print("Wybrano plik 1:", self.file1_path)
+
+    def browsefiles2(self):
+        """Wybór pliku 2 i przypisanie do file2_path"""
+        file2, _ = QFileDialog.getOpenFileName(self, 'Open file')
+        if file2:
+            self.file2_path = file2
+            print("Wybrano plik 2:", self.file2_path)
+
+    def filesCompare(self):
+        """Porównanie dwóch plików, słowo po słowie"""
+        if self.file1_path and self.file2_path:
+            try:
+                with open(self.file1_path, 'r', encoding='utf-8') as f1, open(self.file2_path, 'r', encoding='utf-8') as f2:
+                    lines1 = f1.readlines()  # Wczytaj linie z pliku 1
+                    lines2 = f2.readlines()  # Wczytaj linie z pliku 2
+
+                    words1 = [line.strip().split() for line in lines1]
+                    words2 = [line.strip().split() for line in lines2]
+
+                    if not words1 or not words2:
+                        print("Jeden z plików jest pusty.")
+                        return
+
+                    total_words = sum(len(line) for line in words1) + sum(len(line) for line in words2)
+                    matched_words = 0
+
+                    for line1, line2 in zip(words1, words2):
+                        for word1, word2 in zip(line1, line2):
+                            if word1 == word2:
+                                matched_words += 1
+
+                    percentage_same = (matched_words / total_words) * 200 if total_words > 0 else 0
+                    print(f"Pliki są zgodne w {percentage_same:.2f}%")
+            except Exception as e:
+                print(f"Błąd przy porównywaniu plików: {e}")
+        else:
+            print("Proszę wybrać oba pliki.")
+
+
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     form = MyForm()
     form.show()
     sys.exit(app.exec())
-
-

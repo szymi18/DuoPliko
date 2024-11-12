@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="First commit.">
+    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="make layout.ui and layout2.ui files">
+      <change afterPath="$PROJECT_DIR$/testFile1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testFile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout.ui" beforeDir="false" afterPath="$PROJECT_DIR$/layout.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +43,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -90,7 +96,8 @@
       <option name="presentableId" value="Default" />
       <updated>1731061265540</updated>
       <workItem from="1731061267001" duration="1643000" />
-      <workItem from="1731404671584" duration="1348000" />
+      <workItem from="1731404671584" duration="1757000" />
+      <workItem from="1731406516917" duration="7102000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -116,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731061526370</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="make layout.ui and layout2.ui files">
+      <option name="closed" value="true" />
+      <created>1731406257430</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731406257430</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +141,10 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="First commit" />
     <MESSAGE value="First commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit." />
+    <MESSAGE value="make layout.ui and layout2.ui files" />
+    <option name="LAST_COMMIT_MESSAGE" value="make layout.ui and layout2.ui files" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731413721473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
