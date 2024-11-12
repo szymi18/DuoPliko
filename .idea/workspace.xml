@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="compare file.txt">
+    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="working progressbar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -93,7 +93,7 @@
       <updated>1731061265540</updated>
       <workItem from="1731061267001" duration="1643000" />
       <workItem from="1731404671584" duration="1757000" />
-      <workItem from="1731406516917" duration="7990000" />
+      <workItem from="1731406516917" duration="8474000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -135,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731413799229</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="working progressbar">
+      <option name="closed" value="true" />
+      <created>1731434881704</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731434881704</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,9 +155,10 @@
     <MESSAGE value="First commit." />
     <MESSAGE value="make layout.ui and layout2.ui files" />
     <MESSAGE value="compare file.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="compare file.txt" />
+    <MESSAGE value="working progressbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="working progressbar" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731434656506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731435049165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
