@@ -1,11 +1,9 @@
 import difflib
 import filecmp
 import sys
-from datetime import time
-
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
+from PyQt6.QtCore import QTimer
 from layout import Ui_Dialog
-
 
 class MyForm(QDialog):
     def __init__(self):
@@ -20,28 +18,29 @@ class MyForm(QDialog):
 
         self.file1_path = None
         self.file2_path = None
+        self.target_progress = 0
+        self.current_progress = 0
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.updateProgressBar)
 
     def browsefiles(self):
-        """Wybór pliku 1 i przypisanie do file1_path"""
         file1, _ = QFileDialog.getOpenFileName(self, 'Open file')
         if file1:
             self.file1_path = file1
             print("Wybrano plik 1:", self.file1_path)
 
     def browsefiles2(self):
-        """Wybór pliku 2 i przypisanie do file2_path"""
         file2, _ = QFileDialog.getOpenFileName(self, 'Open file')
         if file2:
             self.file2_path = file2
             print("Wybrano plik 2:", self.file2_path)
 
     def filesCompare(self):
-        """Porównanie dwóch plików, słowo po słowie"""
         if self.file1_path and self.file2_path:
             try:
                 with open(self.file1_path, 'r', encoding='utf-8') as f1, open(self.file2_path, 'r', encoding='utf-8') as f2:
-                    lines1 = f1.readlines()  # Wczytaj linie z pliku 1
-                    lines2 = f2.readlines()  # Wczytaj linie z pliku 2
+                    lines1 = f1.readlines()
+                    lines2 = f2.readlines()
 
                     words1 = [line.strip().split() for line in lines1]
                     words2 = [line.strip().split() for line in lines2]
@@ -58,16 +57,23 @@ class MyForm(QDialog):
                             if word1 == word2:
                                 matched_words += 1
 
-                    percentage_same = (matched_words / total_words) * 200 if total_words > 0 else 0
-                    print(f"Pliki są zgodne w {percentage_same:.2f}%")
+                    self.target_progress = int((matched_words / total_words) * 200) if total_words > 0 else 0
+                    self.current_progress = 0
+                    print(f"Pliki są zgodne w {self.target_progress}%")
+
+                    self.timer.start(20)
+
             except Exception as e:
                 print(f"Błąd przy porównywaniu plików: {e}")
         else:
             print("Proszę wybrać oba pliki.")
 
-
-
-
+    def updateProgressBar(self):
+        if self.current_progress < self.target_progress:
+            self.current_progress += 1
+            self.ui.progressBar.setValue(self.current_progress)
+        else:
+            self.timer.stop()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
