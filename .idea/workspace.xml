@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="update">
+    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="update2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout2.py" beforeDir="false" afterPath="$PROJECT_DIR$/layout2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layout2.ui" beforeDir="false" afterPath="$PROJECT_DIR$/layout2.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -93,7 +95,7 @@
       <updated>1731061265540</updated>
       <workItem from="1731061267001" duration="1643000" />
       <workItem from="1731404671584" duration="1757000" />
-      <workItem from="1731406516917" duration="13981000" />
+      <workItem from="1731406516917" duration="16837000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -159,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731654584458</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update2">
+      <option name="closed" value="true" />
+      <created>1731654608673</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731654608673</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,9 +184,10 @@
     <MESSAGE value="working progressbar" />
     <MESSAGE value="add .pdf file support" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update2" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731654563721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731657404906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

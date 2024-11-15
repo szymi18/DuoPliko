@@ -1,12 +1,10 @@
-import difflib
-import filecmp
 import sys
-
 import PyPDF2
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
 from PyQt6.QtCore import QTimer
 from layout import Ui_Dialog
 from layout2 import Ui_DuoPliko
+
 
 class MyForm(QDialog):
     def __init__(self):
@@ -46,17 +44,17 @@ class MyForm(QDialog):
                 pdf_reader = PyPDF2.PdfReader(file)
                 for page_num in range(len(pdf_reader.pages)):
                     page = pdf_reader.pages[page_num]
-                    content.extend(page.extract_text().splitlines())
-            return content
+                    content.append(page.extract_text())
+            return "\n".join(content)
         else:
             with open(file_path, 'r', encoding='utf-8') as file:
-                return file.readlines()
+                return file.read()
 
     def filesCompare(self):
         if self.file1_path and self.file2_path:
             try:
-                lines1 = self.read_file_content(self.file1_path)
-                lines2 = self.read_file_content(self.file2_path)
+                lines1 = self.read_file_content(self.file1_path).splitlines()
+                lines2 = self.read_file_content(self.file2_path).splitlines()
 
                 words1 = [line.strip().split() for line in lines1]
                 words2 = [line.strip().split() for line in lines2]
@@ -88,23 +86,80 @@ class MyForm(QDialog):
         if self.current_progress < self.target_progress:
             self.current_progress += 1
             self.ui.progressBar.setValue(self.current_progress)
+
         else:
             self.timer.stop()
 
     def openSecondDialog(self):
-        self.second_dialog = MyForm2()
-        self.second_dialog.exec()
+        if self.file1_path and self.file2_path:
+            self.second_dialog = MyForm2(file1_path=self.file1_path, file2_path=self.file2_path, current_progress=self.ui.progressBar.value())
+            self.second_dialog.exec()
+        else:
+            print("Najpierw wybierz oba pliki.")
+
 
 class MyForm2(QDialog):
-    def __init__(self):
+    def __init__(self, file1_path=None, file2_path=None, current_progress=0):
         super().__init__()
         self.ui = Ui_DuoPliko()
         self.ui.setupUi(self)
+        self.ui.progressBar2.setValue(current_progress)
+
+        self.file1_path = file1_path
+        self.file2_path = file2_path
 
         self.ui.return_2.clicked.connect(self.close)
+        self.ui.save.clicked.connect(self.save_changes)
 
+        self.load_files_into_text_edits()
 
         self.show()
+
+    def load_files_into_text_edits(self):
+        if self.file1_path:
+            self.ui.textEdit1.setPlainText(self.read_file_content(self.file1_path))
+        if self.file2_path:
+            self.ui.textEdit2.setPlainText(self.read_file_content(self.file2_path))
+
+    def read_file_content(self, file_path):
+        if file_path.endswith('.pdf'):
+            content = []
+            try:
+                with open(file_path, 'rb') as file:
+                    pdf_reader = PyPDF2.PdfReader(file)
+                    for page_num in range(len(pdf_reader.pages)):
+                        page = pdf_reader.pages[page_num]
+                        content.append(page.extract_text())
+                return "\n".join(content)
+            except Exception as e:
+                print(f"Błąd przy odczycie pliku PDF: {e}")
+                return ""
+        else:
+            try:
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    return file.read()
+            except Exception as e:
+                print(f"Błąd przy odczycie pliku TXT: {e}")
+                return ""
+
+    def save_changes(self):
+        if self.file1_path:
+            self.write_file_content(self.file1_path, self.ui.textEdit1.toPlainText())
+        if self.file2_path:
+            self.write_file_content(self.file2_path, self.ui.textEdit2.toPlainText())
+        print("Zapisano zmiany w plikach.")
+
+    def write_file_content(self, file_path, content):
+        try:
+            if file_path.endswith('.pdf'):
+                print("Zapisywanie do PDF nieobsługiwane w tym przykładzie.")
+            else:
+                with open(file_path, 'w', encoding='utf-8') as file:
+                    file.write(content)
+        except Exception as e:
+            print(f"Błąd przy zapisie pliku {file_path}: {e}")
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
