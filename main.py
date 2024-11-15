@@ -6,6 +6,7 @@ import PyPDF2
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
 from PyQt6.QtCore import QTimer
 from layout import Ui_Dialog
+from layout2 import Ui_DuoPliko
 
 class MyForm(QDialog):
     def __init__(self):
@@ -17,6 +18,7 @@ class MyForm(QDialog):
         self.ui.file1button.clicked.connect(self.browsefiles)
         self.ui.file2button.clicked.connect(self.browsefiles2)
         self.ui.submit.clicked.connect(self.filesCompare)
+        self.ui.show.clicked.connect(self.openSecondDialog)
 
         self.file1_path = None
         self.file2_path = None
@@ -88,6 +90,21 @@ class MyForm(QDialog):
             self.ui.progressBar.setValue(self.current_progress)
         else:
             self.timer.stop()
+
+    def openSecondDialog(self):
+        self.second_dialog = MyForm2()
+        self.second_dialog.exec()
+
+class MyForm2(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_DuoPliko()
+        self.ui.setupUi(self)
+
+        self.ui.return_2.clicked.connect(self.close)
+
+
+        self.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
