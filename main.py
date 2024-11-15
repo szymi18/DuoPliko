@@ -1,3 +1,4 @@
+import os
 import sys
 import PyPDF2
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
@@ -104,6 +105,7 @@ class MyForm2(QDialog):
         self.ui = Ui_DuoPliko()
         self.ui.setupUi(self)
         self.ui.progressBar2.setValue(current_progress)
+        self.ui.label_2.text()
 
         self.file1_path = file1_path
         self.file2_path = file2_path
@@ -118,8 +120,10 @@ class MyForm2(QDialog):
     def load_files_into_text_edits(self):
         if self.file1_path:
             self.ui.textEdit1.setPlainText(self.read_file_content(self.file1_path))
+            self.ui.label_2.setText(f"Plik 1: {os.path.basename(self.file1_path)}")
         if self.file2_path:
             self.ui.textEdit2.setPlainText(self.read_file_content(self.file2_path))
+            self.ui.label.setText(f"Plik 2: {os.path.basename(self.file2_path)}")
 
     def read_file_content(self, file_path):
         if file_path.endswith('.pdf'):
