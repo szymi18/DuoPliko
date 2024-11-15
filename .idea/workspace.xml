@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="add edit file option">
+    <list default="true" id="f914f44b-01bf-4d0e-a45b-7dcc37eda1bf" name="Changes" comment="add file name in label">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout.ui" beforeDir="false" afterPath="$PROJECT_DIR$/layout.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout2.py" beforeDir="false" afterPath="$PROJECT_DIR$/layout2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout2.ui" beforeDir="false" afterPath="$PROJECT_DIR$/layout2.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +97,7 @@
       <updated>1731061265540</updated>
       <workItem from="1731061267001" duration="1643000" />
       <workItem from="1731404671584" duration="1757000" />
-      <workItem from="1731406516917" duration="17216000" />
+      <workItem from="1731406516917" duration="20922000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -175,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731657567099</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add file name in label">
+      <option name="closed" value="true" />
+      <created>1731657836195</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731657836195</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,9 +204,10 @@
     <MESSAGE value="update" />
     <MESSAGE value="update2" />
     <MESSAGE value="add edit file option" />
-    <option name="LAST_COMMIT_MESSAGE" value="add edit file option" />
+    <MESSAGE value="add file name in label" />
+    <option name="LAST_COMMIT_MESSAGE" value="add file name in label" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731657748536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DuoPliko$main.coverage" NAME="main Coverage Results" MODIFIED="1731670853160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

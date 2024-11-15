@@ -1,6 +1,7 @@
 import os
 import sys
 import PyPDF2
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
 from PyQt6.QtCore import QTimer
 from layout import Ui_Dialog
@@ -12,12 +13,14 @@ class MyForm(QDialog):
         super().__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+        self.setWindowIcon(QIcon("./DuoPlikoLogo.png"))
         self.show()
 
         self.ui.file1button.clicked.connect(self.browsefiles)
         self.ui.file2button.clicked.connect(self.browsefiles2)
         self.ui.submit.clicked.connect(self.filesCompare)
         self.ui.show.clicked.connect(self.openSecondDialog)
+
 
         self.file1_path = None
         self.file2_path = None
@@ -105,15 +108,22 @@ class MyForm2(QDialog):
         self.ui = Ui_DuoPliko()
         self.ui.setupUi(self)
         self.ui.progressBar2.setValue(current_progress)
-        self.ui.label_2.text()
+        self.setWindowIcon(QIcon("./DuoPlikoLogo.png"))
 
         self.file1_path = file1_path
         self.file2_path = file2_path
 
         self.ui.return_2.clicked.connect(self.close)
         self.ui.save.clicked.connect(self.save_changes)
+        self.ui.file_compare_button.clicked.connect(self.compare_files_and_update)
 
         self.load_files_into_text_edits()
+
+        # Add a timer for progress bar animation in MyForm2
+        self.timer2 = QTimer(self)
+        self.timer2.timeout.connect(self.updateProgressBar2)
+        self.current_progress2 = 0  # To keep track of the current progress
+        self.target_progress2 = 0   # To set the target progress
 
         self.show()
 
@@ -124,6 +134,8 @@ class MyForm2(QDialog):
         if self.file2_path:
             self.ui.textEdit2.setPlainText(self.read_file_content(self.file2_path))
             self.ui.label.setText(f"Plik 2: {os.path.basename(self.file2_path)}")
+        if self.is_pdf(self.file1_path) or self.is_pdf(self.file2_path):
+            self.ui.user_info2.setText("Pliki .pdf nie mogą być edytowane.")
 
     def read_file_content(self, file_path):
         if file_path.endswith('.pdf'):
@@ -146,6 +158,11 @@ class MyForm2(QDialog):
                 print(f"Błąd przy odczycie pliku TXT: {e}")
                 return ""
 
+    def is_pdf(self, file_path):
+        if file_path and file_path.endswith('.pdf'):
+            return True
+        return False
+
     def save_changes(self):
         if self.file1_path:
             self.write_file_content(self.file1_path, self.ui.textEdit1.toPlainText())
@@ -163,6 +180,43 @@ class MyForm2(QDialog):
         except Exception as e:
             print(f"Błąd przy zapisie pliku {file_path}: {e}")
 
+    def compare_files_and_update(self):
+        if self.file1_path and self.file2_path:
+            try:
+                lines1 = self.read_file_content(self.file1_path).splitlines()
+                lines2 = self.read_file_content(self.file2_path).splitlines()
+
+                words1 = [line.strip().split() for line in lines1]
+                words2 = [line.strip().split() for line in lines2]
+
+                if not words1 or not words2:
+                    print("Jeden z plików jest pusty.")
+                    return
+
+                total_words = sum(len(line) for line in words1) + sum(len(line) for line in words2)
+                matched_words = 0
+
+                for line1, line2 in zip(words1, words2):
+                    for word1, word2 in zip(line1, line2):
+                        if word1 == word2:
+                            matched_words += 1
+
+                self.target_progress2 = int((matched_words / total_words) * 200) if total_words > 0 else 0
+                print(f"Pliki są zgodne w {self.target_progress2}%")
+
+                self.timer2.start(20)  # Start the timer to animate progress
+
+            except Exception as e:
+                print(f"Błąd przy porównywaniu plików: {e}")
+        else:
+            print("Proszę wybrać oba pliki.")
+
+    def updateProgressBar2(self):
+        if self.current_progress2 < self.target_progress2:
+            self.current_progress2 += 1
+            self.ui.progressBar2.setValue(self.current_progress2)
+        else:
+            self.timer2.stop()
 
 
 if __name__ == '__main__':
