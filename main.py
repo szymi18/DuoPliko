@@ -1,7 +1,9 @@
 import os
 import sys
+from difflib import Differ
+
 import PyPDF2
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QColor, QTextCharFormat
 from PyQt6.QtWidgets import QDialog, QApplication, QFileDialog
 from PyQt6.QtCore import QTimer
 from layout import Ui_Dialog
@@ -118,12 +120,12 @@ class MyForm2(QDialog):
         self.ui.file_compare_button.clicked.connect(self.compare_files_and_update)
 
         self.load_files_into_text_edits()
+        self.show_differences()
 
-        # Add a timer for progress bar animation in MyForm2
         self.timer2 = QTimer(self)
         self.timer2.timeout.connect(self.updateProgressBar2)
-        self.current_progress2 = 0  # To keep track of the current progress
-        self.target_progress2 = 0   # To set the target progress
+        self.current_progress2 = 0
+        self.target_progress2 = 0
 
         self.show()
 
@@ -204,12 +206,38 @@ class MyForm2(QDialog):
                 self.target_progress2 = int((matched_words / total_words) * 200) if total_words > 0 else 0
                 print(f"Pliki są zgodne w {self.target_progress2}%")
 
-                self.timer2.start(20)  # Start the timer to animate progress
+                self.timer2.start(20)
 
             except Exception as e:
                 print(f"Błąd przy porównywaniu plików: {e}")
         else:
             print("Proszę wybrać oba pliki.")
+
+    def show_differences(self):
+        text1 = self.read_file_content(self.file1_path).splitlines()
+        text2 = self.read_file_content(self.file2_path).splitlines()
+
+        differ = Differ()
+        diff = list(differ.compare(text1, text2))
+
+        self.ui.textEdit1.clear()
+        self.ui.textEdit2.clear()
+
+        for line in diff:
+            if line.startswith('  '):
+                self.add_formatted_text(self.ui.textEdit1, line[2:], QColor('black'))
+                self.add_formatted_text(self.ui.textEdit2, line[2:], QColor('black'))
+            elif line.startswith('- '):
+                self.add_formatted_text(self.ui.textEdit1, line[2:], QColor('red'))
+            elif line.startswith('+ '):
+                self.add_formatted_text(self.ui.textEdit2, line[2:], QColor('green'))
+
+    def add_formatted_text(self, text_edit, text, color):
+        cursor = text_edit.textCursor()
+        format = QTextCharFormat()
+        format.setForeground(color)
+        cursor.insertText(text + '\n', format)
+
 
     def updateProgressBar2(self):
         if self.current_progress2 < self.target_progress2:
