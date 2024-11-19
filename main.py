@@ -121,6 +121,8 @@ class MyForm2(QDialog):
 
         self.load_files_into_text_edits()
         self.show_differences()
+        self.ui.save.clicked.connect(self.show_differences)
+
 
         self.timer2 = QTimer(self)
         self.timer2.timeout.connect(self.updateProgressBar2)
